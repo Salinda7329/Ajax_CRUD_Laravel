@@ -89,7 +89,7 @@
                     </div>
                     <div class="card-body">
 
-                        <table id="studentDetailsTable" class="display">
+                        {{-- <table id="studentDetailsTable" class="display">
                             <thead>
                                 <tr>
                                     <th>Column 1</th>
@@ -106,7 +106,9 @@
                                     <td>Row 2 Data 2</td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> --}}
+
+                        <div id="show_all_student_data"></div>
 
                     </div>
 
@@ -186,7 +188,8 @@
 
     <script>
         $(document).ready(function() {
-            $('#studentDetailsTable').DataTable();
+            //Make table a data table
+            // $('#studentDetailsTable').DataTable();
 
 
             $('#addStudentDetailsForm').submit(function(e) {
@@ -234,7 +237,10 @@
                     url: '{{ route('fetchAll') }}',
                     method: 'get',
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
+                        $('#show_all_student_data').html(response);
+                          //Make table a data table
+            $('#studentDetailsTable').DataTable();
                     }
 
 
