@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Student;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +19,5 @@ Route::get('/', function () {
     return view('home');
 });
 //route to store student data
-Route::post('/store',[Student::class,'store'])->name('store');
+Route::post('/store',[StudentController::class,'store'])->name('store');
 

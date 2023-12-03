@@ -129,7 +129,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 {{-- student details <form action=""></form> --}}
-                <form action="/createStudent" method="POST" id="addStudentForm" enctype="multipart/form-data">
+                <form action="#" method="POST" id="addStudentDetailsForm" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
 
@@ -159,7 +159,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="addStudentButton">Add Students</button>
+                        <button type="submit" class="btn btn-primary" id="add_student_details_button">Add
+                            Students</button>
                     </div>
                 </form>
 
@@ -185,6 +186,31 @@
     <script>
         $(document).ready(function() {
             $('#studentDetailsTable').DataTable();
+            $('#addStudentDetailsForm').submit(function(e) {
+                e.preventDefault();
+                //save form data to fd constant
+                const fd = new FormData(this);
+                //change submit button to adding
+                $('#add_student_details_button').text('Adding..');
+
+
+                $.ajax({
+                    url: '{{ route('store') }}',
+                    method: 'post',
+                    data:fd,
+                    cache:false,
+                    contentType:false,
+                    processData:false,
+                    dataType:'json',
+                    success:function(response){
+                        console.log(response);
+                    }
+                });
+
+
+            });
+
+
         });
     </script>
 
