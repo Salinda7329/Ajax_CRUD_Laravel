@@ -138,14 +138,14 @@
                                 <label for="colFormLabel" class="col-sm-2 col-form-label">Avatar</label>
                                 <div>
                                     <input type="file" class="form-control" id="colFormLabel"
-                                        placeholder="col-form-label" name="Avatar" required>
+                                        placeholder="col-form-label" name="avatar" required>
                                 </div>
                             </div>
                             <div class="col-lg">
                                 <label for="colFormLabel" class="col-sm-2 col-form-label">Name</label>
                                 <div>
                                     <input type="text" class="form-control" id="colFormLabel"
-                                        placeholder="col-form-label" name="Name" required>
+                                        placeholder="col-form-label" name="name" required>
                                 </div>
                             </div>
                         </div>
