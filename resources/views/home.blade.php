@@ -334,7 +334,7 @@
                     processData: false,
                     dataType: 'json',
                     success: function(response) {
-                        console.log(response);
+                        // console.log(response);
                         if (response.status == 200) {
                             Swal.fire({
                                 title: 'Updated!',

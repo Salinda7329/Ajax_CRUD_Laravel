@@ -112,5 +112,9 @@ class StudentController extends Controller
          'email' => $request->email,
       ]);
 
+      return response()->json([
+         'status' => 200,
+      ]);
+
    }
 }
