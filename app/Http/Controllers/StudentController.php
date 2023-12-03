@@ -59,7 +59,8 @@ class StudentController extends Controller
                             <td><img src='storage/images/".$student->avatar."'width='50px' height='50px' class='img-thumbnail rounded-circle'></td>
                             <td>".$student->name."</td>
                             <td>".$student->email."</td>
-                            <td>Edit | Delete</td>
+                            <td><a href='#' id='".$student->id."'  data-bs-toggle='modal'
+                            data-bs-target='#EditStudentsModal' class='editUserButton'>Edit</a> | Delete</td>
                         </tr>";
                     }
 
@@ -72,4 +73,16 @@ class StudentController extends Controller
             echo "<h3 align='center'>No Records in Database</h3>";
         }
     }
+
+
+    public function edit(Request $request){
+
+        $userId= $request->id;
+        //find data of id using Student model
+        $student=Student::find($userId);
+        return response()->json($student);
+
+    }
+
+
 }

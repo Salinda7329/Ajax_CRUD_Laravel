@@ -155,7 +155,7 @@
                         <div class="col-lg">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">E-mail</label>
                             <div>
-                                <input type="E-mail" class="form-control" id="colFormLabel"
+                                <input type="email" class="form-control" id="colFormLabel"
                                     placeholder="col-form-label" name="email" required>
                             </div>
                         </div>
@@ -173,40 +173,40 @@
     {{-- model/ --}}
 
     <!-- Edit Student Modal -->
-    <div class="modal fade" id="AddNewStudentsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="EditStudentsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Student</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Student</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 {{-- student details <form action=""></form> --}}
-                <form action="#" method="POST" id="addStudentDetailsForm" enctype="multipart/form-data">
+                <form action="#" method="POST" id="EditStudentDetailsForm" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
 
                         <div class="row">
                             <div class="col-lg">
-                                <label for="colFormLabel" class="col-sm-2 col-form-label">Avatar</label>
+                                <label for="colFormLabel" class="col-sm-2 col-form-label" >Avatar</label>
                                 <div>
-                                    <input type="file" class="form-control" id="colFormLabel"
-                                        placeholder="col-form-label" name="avatar" required>
+                                    <input type="file" class="form-control"
+                                         name="avatar" id="avatar1">
                                 </div>
                             </div>
                             <div class="col-lg">
                                 <label for="colFormLabel" class="col-sm-2 col-form-label">Name</label>
                                 <div>
-                                    <input type="text" class="form-control" id="colFormLabel"
-                                        placeholder="col-form-label" name="name" required>
+                                    <input type="text" class="form-control"
+                                         name="name" id="name1">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">E-mail</label>
                             <div>
-                                <input type="E-mail" class="form-control" id="colFormLabel"
-                                    placeholder="col-form-label" name="email" required>
+                                <input type="email" class="form-control" 
+                                     name="email" id="email1">
                             </div>
                         </div>
                     </div>
@@ -220,7 +220,7 @@
             </div>
         </div>
     </div>
-    {{-- model/ --}}
+    {{-- edit student model/ --}}
 
     {{-- data table activation java script --}}
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -280,6 +280,34 @@
 
             });
 
+            $(document).on('click', '.editUserButton', function(e) {
+                e.preventDefault();
+                var id = $(this).attr('id');
+                // alert(id);
+
+                $.ajax({
+                    url: '{{ route('edit') }}',
+                    method: 'get',
+                    data: {
+                        id: id,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response){
+
+                        console.log(response.name);
+                        $('#name1').val(response.name);
+                        $('#email1').val(response.email);
+                        // $('#avatar1').html(
+                        //     `<img src="storage/images/${response.avatar}" width="100px" height="100px" class="img-fluid img-thumbnail`
+                        // );
+
+                    }
+
+
+                });
+
+            })
+
             fetchAllStudentData();
 
             function fetchAllStudentData() {
@@ -289,13 +317,14 @@
                     success: function(response) {
                         // console.log(response);
                         $('#show_all_student_data').html(response);
-                          //Make table a data table
-            $('#studentDetailsTable').DataTable();
+                        //Make table a data table
+                        $('#studentDetailsTable').DataTable();
                     }
 
 
                 });
             }
+
 
         });
     </script>
