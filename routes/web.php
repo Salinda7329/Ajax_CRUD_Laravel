@@ -27,3 +27,6 @@ Route::get('/fetchall',[StudentController::class,'fetchAllData'])->name('fetchAl
 //route to edit student data
 Route::get('/edit',[StudentController::class,'edit'])->name('edit');
 
+//route to update student data
+Route::post('/update',[StudentController::class,'update'])->name('update');
+

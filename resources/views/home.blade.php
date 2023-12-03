@@ -182,9 +182,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 {{-- student details <form action=""></form> --}}
-                <form action="#" method="POST" id="EditStudentDetailsForm" enctype="multipart/form-data">
+                <form action="#" method="POST" id="UpdateStudentDetailsForm" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
+
+                        {{-- hidden id input field --}}
+                        <input type="hidden" id="user_Id" name="user_Id_hidden">
 
                         <div class="row">
 
@@ -192,32 +195,30 @@
                             <div id="avatar1"></div>
 
                             <div class="col-lg">
-                                <label for="colFormLabel" class="col-sm-2 col-form-label" >Avatar</label>
+                                <label for="colFormLabel" class="col-sm-2 col-form-label">Avatar</label>
                                 <div>
-                                    <input type="file" class="form-control"
-                                         name="avatar">
+                                    <input type="file" class="form-control" name="avatar">
                                 </div>
                             </div>
                             <div class="col-lg">
                                 <label for="colFormLabel" class="col-sm-2 col-form-label">Name</label>
                                 <div>
-                                    <input type="text" class="form-control"
-                                         name="name" id="name1">
+                                    <input type="text" class="form-control" name="name" id="name1"
+                                        required>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">E-mail</label>
                             <div>
-                                <input type="email" class="form-control"
-                                     name="email" id="email1">
+                                <input type="email" class="form-control" name="email" id="email1" required>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="add_student_details_button">Add
-                            Students</button>
+                        <button type="submit" class="btn btn-primary" id="Update_student_details_button">Update
+                            Student</button>
                     </div>
                 </form>
 
@@ -245,7 +246,7 @@
             //Make table a data table
             // $('#studentDetailsTable').DataTable();
 
-
+            //Add form
             $('#addStudentDetailsForm').submit(function(e) {
                 e.preventDefault();
                 //save form data to fd constant
@@ -296,9 +297,11 @@
                         id: id,
                         _token: '{{ csrf_token() }}'
                     },
-                    success: function(response){
+                    success: function(response) {
 
                         // console.log(response.name);
+                        // Set id value to the hidden field
+                        $('#user_Id').val(response.id);
                         $('#name1').val(response.name);
                         $('#email1').val(response.email);
                         $('#avatar1').html(
@@ -310,7 +313,47 @@
 
                 });
 
+
             })
+
+            //Update form
+            $('#UpdateStudentDetailsForm').submit(function(e) {
+                e.preventDefault();
+                //save form data to fd constant
+                const fd = new FormData(this);
+                //change submit button to adding
+                $('#Update_student_details_button').text('Updating..');
+
+
+                $.ajax({
+                    url: '{{ route('update') }}',
+                    method: 'post',
+                    data: fd,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        console.log(response);
+                        if (response.status == 200) {
+                            Swal.fire({
+                                title: 'Updated!',
+                                text: 'Student Updated Successfully',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            })
+                            $('#Update_student_details_button').text(' Update Student');
+                            $('#UpdateStudentDetailsForm')[0].reset();
+                            $('#EditStudentsModal').modal('hide');
+
+
+                         }
+                    }
+               });
+               fetchAllStudentData();
+
+
+            });
 
             fetchAllStudentData();
 
