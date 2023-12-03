@@ -97,7 +97,8 @@ class StudentController extends Controller
          $file->storeAs('public/images', $fileName);
          //if want to delete the old picture
          if($student->avatar){
-            Storage::delete('public/images'. $student->avatar);
+            Storage::delete('public/images/' . $student->avatar);
+
          }
 
       } else {
