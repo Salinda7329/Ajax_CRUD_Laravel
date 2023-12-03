@@ -172,6 +172,56 @@
     </div>
     {{-- model/ --}}
 
+    <!-- Edit Student Modal -->
+    <div class="modal fade" id="AddNewStudentsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Student</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                {{-- student details <form action=""></form> --}}
+                <form action="#" method="POST" id="addStudentDetailsForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        @csrf
+
+                        <div class="row">
+                            <div class="col-lg">
+                                <label for="colFormLabel" class="col-sm-2 col-form-label">Avatar</label>
+                                <div>
+                                    <input type="file" class="form-control" id="colFormLabel"
+                                        placeholder="col-form-label" name="avatar" required>
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <label for="colFormLabel" class="col-sm-2 col-form-label">Name</label>
+                                <div>
+                                    <input type="text" class="form-control" id="colFormLabel"
+                                        placeholder="col-form-label" name="name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg">
+                            <label for="colFormLabel" class="col-sm-2 col-form-label">E-mail</label>
+                            <div>
+                                <input type="E-mail" class="form-control" id="colFormLabel"
+                                    placeholder="col-form-label" name="email" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="add_student_details_button">Add
+                            Students</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {{-- model/ --}}
+
     {{-- data table activation java script --}}
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>

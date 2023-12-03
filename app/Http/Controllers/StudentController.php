@@ -47,6 +47,7 @@ class StudentController extends Controller
                             <th>Avatar</th>
                             <th>Name</th>
                             <th>E-mail</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>";
@@ -58,6 +59,7 @@ class StudentController extends Controller
                             <td><img src='storage/images/".$student->avatar."'width='50px' height='50px' class='img-thumbnail rounded-circle'></td>
                             <td>".$student->name."</td>
                             <td>".$student->email."</td>
+                            <td>Edit | Delete</td>
                         </tr>";
                     }
 
