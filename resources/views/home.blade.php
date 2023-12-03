@@ -82,7 +82,7 @@
                         <h4>Student Management System</h4>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#AddStudentsModal">
+                            data-bs-target="#AddNewStudentsModal">
                             <i class="bi bi-plus-circle-fill"></i>
                             Add New Student
                         </button>
@@ -121,7 +121,7 @@
     </div>
 
     <!-- Add New Student Modal -->
-    <div class="modal fade" id="AddStudentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddNewStudentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -197,13 +197,24 @@
                 $.ajax({
                     url: '{{ route('store') }}',
                     method: 'post',
-                    data:fd,
-                    cache:false,
-                    contentType:false,
-                    processData:false,
-                    dataType:'json',
-                    success:function(response){
-                        console.log(response);
+                    data: fd,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json',
+                    success: function(response) {
+                        // console.log(response);
+                        if (response.status == 200) {
+                            Swal.fire({
+                                title: 'Added!',
+                                text: 'Student Added Successfully',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            })
+                            $('#add_student_details_button').text('Add Students');
+                            $('#addStudentDetailsForm')[0].reset();
+                            $('#AddNewStudentsModal').modal('hide');
+                        }
                     }
                 });
 
