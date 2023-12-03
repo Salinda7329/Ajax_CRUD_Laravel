@@ -187,11 +187,15 @@
                         @csrf
 
                         <div class="row">
+
+                            {{-- load avatar image --}}
+                            <div id="avatar1"></div>
+
                             <div class="col-lg">
                                 <label for="colFormLabel" class="col-sm-2 col-form-label" >Avatar</label>
                                 <div>
                                     <input type="file" class="form-control"
-                                         name="avatar" id="avatar1">
+                                         name="avatar">
                                 </div>
                             </div>
                             <div class="col-lg">
@@ -205,7 +209,7 @@
                         <div class="col-lg">
                             <label for="colFormLabel" class="col-sm-2 col-form-label">E-mail</label>
                             <div>
-                                <input type="email" class="form-control" 
+                                <input type="email" class="form-control"
                                      name="email" id="email1">
                             </div>
                         </div>
@@ -294,12 +298,12 @@
                     },
                     success: function(response){
 
-                        console.log(response.name);
+                        // console.log(response.name);
                         $('#name1').val(response.name);
                         $('#email1').val(response.email);
-                        // $('#avatar1').html(
-                        //     `<img src="storage/images/${response.avatar}" width="100px" height="100px" class="img-fluid img-thumbnail`
-                        // );
+                        $('#avatar1').html(
+                            `<img src="storage/images/${response.avatar}" width="100px" height="100px" class="img-fluid img-thumbnail">`
+                        );
 
                     }
 
