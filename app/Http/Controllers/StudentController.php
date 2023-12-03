@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     public function store(Request $request){
-        
+
         $file = $request->file('avatar');
         $fileName = time() . '.' . $file->getClientOriginalExtension();
         $file->storeAs('public/images',$fileName);
@@ -24,6 +24,16 @@ class StudentController extends Controller
         ]);
 
 
+
+    }
+
+    public function fetchAllData(){
+
+        $students=Student::all();
+
+        return response()->json([
+            'status' => $students,
+        ]);
 
     }
 }

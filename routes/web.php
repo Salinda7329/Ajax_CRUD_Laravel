@@ -21,3 +21,6 @@ Route::get('/', function () {
 //route to store student data
 Route::post('/store',[StudentController::class,'store'])->name('store');
 
+//route to fetch student data
+Route::get('/fetchall',[StudentController::class,'fetchAllData'])->name('fetchAll');
+

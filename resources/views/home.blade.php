@@ -121,7 +121,8 @@
     </div>
 
     <!-- Add New Student Modal -->
-    <div class="modal fade" id="AddNewStudentsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddNewStudentsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -186,6 +187,8 @@
     <script>
         $(document).ready(function() {
             $('#studentDetailsTable').DataTable();
+
+
             $('#addStudentDetailsForm').submit(function(e) {
                 e.preventDefault();
                 //save form data to fd constant
@@ -214,6 +217,9 @@
                             $('#add_student_details_button').text('Add Students');
                             $('#addStudentDetailsForm')[0].reset();
                             $('#AddNewStudentsModal').modal('hide');
+
+                            fetchAllStudentData();
+
                         }
                     }
                 });
@@ -221,6 +227,19 @@
 
             });
 
+            fetchAllStudentData();
+
+            function fetchAllStudentData() {
+                $.ajax({
+                    url: '{{ route('fetchAll') }}',
+                    method: 'get',
+                    success: function(response) {
+                        console.log(response);
+                    }
+
+
+                });
+            }
 
         });
     </script>
