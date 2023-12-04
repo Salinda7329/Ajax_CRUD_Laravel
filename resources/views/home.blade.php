@@ -348,9 +348,9 @@
                             $('#EditStudentsModal').modal('hide');
 
                             fetchAllStudentData();
-                         }
+                        }
                     }
-               });
+                });
 
 
             });
@@ -373,12 +373,42 @@
             }
 
             //Delete student function
-            $(document).on('click','.deleteUserButton',function(e){
+            $(document).on('click', '.deleteUserButton', function(e) {
                 e.preventDefault();
 
-                let id=$(this).attr('id');
+                let id = $(this).attr('id');
 
-                alert(id);
+                // alert(id);
+                let csrf = '{{ csrf_token() }}';
+
+                Swal.fire({
+                    title: "Attention..!",
+                    text:"Are you sure you want to delete this?",
+                    icon:"warning",
+                    showCancelButton: true,
+                    confirmButtonColor:"Green",
+                    confirmButtonText: "Delete",
+                }).then((result) => {
+                    /* if isConfirmed then action*/
+                    if (result.isConfirmed) {
+                        Swal.fire("Deleted!", "", "success");
+
+                        $.ajax({
+                            url:'{{ route("delete") }}',
+                            method:'delete',
+                            data:{
+                                id:id,
+                                _token:csrf
+                            },
+                            success: function(response){
+                                console.log(response);
+                            }
+                        });
+
+                    }
+                });
+
+
             })
 
         });
