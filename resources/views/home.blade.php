@@ -346,11 +346,10 @@
                             $('#UpdateStudentDetailsForm')[0].reset();
                             $('#EditStudentsModal').modal('hide');
 
-
+                            fetchAllStudentData();
                          }
                     }
                });
-               fetchAllStudentData();
 
 
             });
