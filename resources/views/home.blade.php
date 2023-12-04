@@ -285,9 +285,10 @@
 
             });
 
+            //edit user button
             $(document).on('click', '.editUserButton', function(e) {
                 e.preventDefault();
-                var id = $(this).attr('id');
+                let id = $(this).attr('id');
                 // alert(id);
 
                 $.ajax({
@@ -355,7 +356,7 @@
             });
 
             fetchAllStudentData();
-
+            //fetch data from database function
             function fetchAllStudentData() {
                 $.ajax({
                     url: '{{ route('fetchAll') }}',
@@ -371,6 +372,14 @@
                 });
             }
 
+            //Delete student function
+            $(document).on('click','.deleteUserButton',function(e){
+                e.preventDefault();
+
+                let id=$(this).attr('id');
+
+                alert(id);
+            })
 
         });
     </script>

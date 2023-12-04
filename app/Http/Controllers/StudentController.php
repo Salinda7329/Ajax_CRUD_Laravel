@@ -61,7 +61,11 @@ class StudentController extends Controller
                             <td>" . $student->name . "</td>
                             <td>" . $student->email . "</td>
                             <td><a href='#' id='" . $student->id . "'  data-bs-toggle='modal'
-                            data-bs-target='#EditStudentsModal' class='editUserButton'>Edit</a> | Delete</td>
+                            data-bs-target='#EditStudentsModal' class='editUserButton'>Edit</a> |
+
+                            <a href='#' id='" . $student->id . "' class='deleteUserButton'>Delete</a>
+
+                            </td>
                         </tr>";
          }
 

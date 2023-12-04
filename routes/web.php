@@ -30,3 +30,6 @@ Route::get('/edit',[StudentController::class,'edit'])->name('edit');
 //route to update student data
 Route::post('/update',[StudentController::class,'update'])->name('update');
 
+//route to delete student data
+Route::delete('/delete',[StudentController::class,'delete'])->name('delete');
+
