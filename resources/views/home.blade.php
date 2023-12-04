@@ -383,29 +383,35 @@
 
                 Swal.fire({
                     title: "Attention..!",
-                    text:"Are you sure you want to delete this?",
-                    icon:"warning",
+                    text: "Are you sure you want to delete this record?",
+                    icon: "warning",
                     showCancelButton: true,
-                    confirmButtonColor:"Green",
+                    confirmButtonColor: "Green",
                     confirmButtonText: "Delete",
                 }).then((result) => {
-                    /* if isConfirmed then action*/
-                    if (result.isConfirmed) {
-                        Swal.fire("Deleted!", "", "success");
 
-                        $.ajax({
-                            url:'{{ route("delete") }}',
-                            method:'delete',
-                            data:{
-                                id:id,
-                                _token:csrf
-                            },
-                            success: function(response){
-                                console.log(response);
+                    $.ajax({
+                        url: '{{ route('delete') }}',
+                        method: 'delete',
+                        data: {
+                            id: id,
+                            _token: csrf
+                        },
+                        success: function(response) {
+                            // console.log(response);
+                            if (response.status == 'ok') {
+                                Swal.fire({
+                                    title: 'Deleted..!',
+                                    text: 'Student Deleted Successfully',
+                                    icon: 'success',
+                                    confirmButtonText: 'Ok'
+                                })
+
+                                fetchAllStudentData();
                             }
-                        });
+                        }
+                    });
 
-                    }
                 });
 
 

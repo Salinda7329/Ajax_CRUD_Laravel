@@ -128,9 +128,16 @@ class StudentController extends Controller
         //find data of id using Student model
         $student = Student::find($userId);
 
+        if(Storage::delete('public/images/' . $student->avatar)){
+            Student::destroy($userId);
+            return response()->json([
+                'status' => 'ok',
+            ]);
+        }else{
+            return response()->json([
+                'status' => 'error',
+            ]);
+        }
 
-        return response()->json([
-            'data' => $student,
-        ]);
     }
 }
